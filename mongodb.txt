@@ -1,0 +1,128 @@
+﻿
+$ node server/index.js (para iniciar mongodb)
+
+arrancar servicios (c/programs/mongo/.../bin)
+->mongod.exe
+
+consola mongo
+->mongo.exe
+-----
+
+show dbs
+
+use gam
+
+db.createUser({
+  user: '001',
+  pwd: '0011',
+  roles: ['readWrite', 'dbAdmin']
+});
+
+db.createCollection('empresas')
+
+show collections
+
+db.empresas.insert([
+  {
+    nombre: 'AMBULANCIAS BENITO, SL',
+    direccion: 'Asimov',
+    codPostal: '08201',
+    poblacion:'Sabadell',
+    provincia:'Barcelona'
+  },
+  {
+    nombre: 'EMPRESA GRANADA',
+    direccion: 'calle inventada',
+    codPostal: '46117',
+    poblacion:'Betera',
+    provincia:'Valencia'
+  }
+  ])
+
+db.empresas.find().pretty()
+
+db.empresas.find();
+db.empresas.find({nombre: 'EMPRESA GRANADA'}).pretty();
+
+// replace or update data
+db.empresas.update(
+  {firstName: 'Joe'}, //query
+  {
+    firstName: 'Joe',
+    lastName: 'MacMillan',
+    gender: 'male'
+  } // new data
+);
+
+// add a new date
+db.empresas.update(
+  {firstName: 'Isaac'},
+  {
+    $set: {gender: 'male'}
+  }
+);
+//añadir campo
+db.empresas.update(
+  {firstName: 'Isaac'},
+  {
+    $set: {age: 45}
+  }
+);
+//eliminar campo (el 1 es como un true)
+db.empresas.update(
+  {firstName: 'Isaac'},
+  {
+    $unset:  {age: 1}
+  }
+)
+//aumentar campo numerico en +5
+db.empresas.update(
+  {firstName: 'Isaac'},
+  {
+    $inc: {age: 5}
+  }
+);
+
+//actualizar y si no existe creamos
+db.empresas.update(
+  {firstName: 'Elena'} ,
+  {
+    firstName: 'Elena',
+    lastName: 'Soraya'
+  },
+  { upsert: true}
+)
+//cambiar nombre campo
+db.empresas.update(
+  {firstName: 'Isaac'},
+  {
+    $rename: {"gender": "sex"}
+  }
+)
+
+db.empresas.remove({firstName: "Isaac"})
+db.empresas.remove({firstName: "Isaac"}, {justOne: true})
+
+db.empresas.find({firstName: "Elena"});
+db.empresas.find({$or: [{firstName: "Elena"}, {firstName: "Isaac"}]})
+db.empresas.fid({gender: "male"})
+
+db.empresas.find({age: {$lt: 40}})
+db.empresas.find({age: {$gt: 40}})
+db.empresas.find({age: {$gt: 30, $lt: 90}});
+
+db.empresas.find({"address.city": "Boston"})
+
+db.empresas.find({name: {$regex: 'ston'}});
+
+// sorting
+db.empresas.find().sort({lastName: 1});
+db.empresas.find().sort({lastName: -1});
+db.empresas.find().count()
+db.empresas.find({gender: "male"}).count()
+db.empresas.find().limit(4)
+db.empresas.find().limit(4).sort({lastName: -1})
+
+db.empresas.find().forEach(function(doc) {
+  print("Customer Name" + doc.firstName);
+});
