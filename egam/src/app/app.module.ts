@@ -2,7 +2,6 @@ import * as $ from 'jquery';
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { RouterModule } from '@angular/router';
-import { FormsModule } from '@angular/forms';
 import { HttpClientModule, HttpClient } from '@angular/common/http';
 import { LocationStrategy, HashLocationStrategy } from '@angular/common';
 import { AppRoutes } from './app.routing';
@@ -20,6 +19,16 @@ import { SpinnerComponent } from './shared/spinner.component';
 import { PacienteComponent } from './paciente/paciente.component';
 import { StarterComponent } from './starter/starter.component';
 
+import {
+  MatButtonModule, MatDialogModule, MatIconModule, MatInputModule, MatPaginatorModule, MatSortModule,
+  MatTableModule, MatToolbarModule,
+} from '@angular/material';
+import {DataService} from './services/data.service';
+import {AddDialogComponent} from './dialogs/add/add.dialog.component';
+import {EditDialogComponent} from './dialogs/edit/edit.dialog.component';
+import {DeleteDialogComponent} from './dialogs/delete/delete.dialog.component';
+import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
+import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 @NgModule({
   declarations: [
     AppComponent,
@@ -29,18 +38,36 @@ import { StarterComponent } from './starter/starter.component';
     AppSidebarComponent,
     PacienteComponent,
     StarterComponent,
+    AddDialogComponent,
+    EditDialogComponent,
+    DeleteDialogComponent
   ],
   imports: [
     BrowserModule,
     BrowserAnimationsModule,
-    DemoMaterialModule,
-    FormsModule,
-    FlexLayoutModule,
     HttpClientModule,
+    MatDialogModule,
+    FormsModule,
+    MatButtonModule,
+    MatInputModule,
+    MatIconModule,
+    MatSortModule,
+    MatTableModule,
+    MatToolbarModule,
+    MatPaginatorModule,
+    ReactiveFormsModule
+    DemoMaterialModule,
+    FlexLayoutModule,
     SharedModule,
     RouterModule.forRoot(AppRoutes)
   ],
+  entryComponents: [
+    AddDialogComponent,
+    EditDialogComponent,
+    DeleteDialogComponent
+  ],
   providers: [
+    DataService,
   {
     provide: LocationStrategy,
     useClass: HashLocationStrategy

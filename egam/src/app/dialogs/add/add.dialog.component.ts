@@ -2,8 +2,8 @@ import {MAT_DIALOG_DATA, MatDialogRef} from '@angular/material';
 import {Component, Inject} from '@angular/core';
 import {DataService} from '../../services/data.service';
 import {FormControl, Validators} from '@angular/forms';
-// import {Issue} from '../../models/issue';
-import { Paciente } from '../../models/paciente';
+import {Issue} from '../../models/issue';
+
 @Component({
   selector: 'app-add.dialog',
   templateUrl: '../../dialogs/add/add.dialog.html',
@@ -12,7 +12,7 @@ import { Paciente } from '../../models/paciente';
 
 export class AddDialogComponent {
   constructor(public dialogRef: MatDialogRef<AddDialogComponent>,
-              @Inject(MAT_DIALOG_DATA) public data: Paciente,
+              @Inject(MAT_DIALOG_DATA) public data: Issue,
               public dataService: DataService) { }
 
   formControl = new FormControl('', [

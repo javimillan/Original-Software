@@ -1,31 +1,54 @@
-<mat-form-field>
-  <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Buscar paciente...">
-</mat-form-field>
-<div class="mat-elevation-z8">
-  <table mat-table matSort [dataSource]="dataSource">
+<mat-toolbar color="primary">
+  <span>Listado de pacientes</span>
+  <span class="spacer"></span>
+  Actualizar:
+  <button mat-icon-button (click)="refresh()">
+    <mat-icon>refresh</mat-icon>
+  </button>
+</mat-toolbar>
 
-    <!-- Position Column -->
-    <ng-container matColumnDef="position">
-      <th mat-header-cell *matHeaderCellDef mat-sort-header> No. </th>
-      <td mat-cell *matCellDef="let element"> {{element.position}} </td>
+<div class="container mat-elevation-z8">
+
+  <div class="form">
+    <mat-form-field floatPlaceholder="never" color="accent">
+      <input matInput #filter placeholder="Filter issues">
+    </mat-form-field>
+  </div>
+
+  <mat-table #table [dataSource]="dataSource" matSort class="mat-cell">
+
+    <!--- Note that these columns can be defined in any order.
+          The actual rendered columns are set as a property on the row definition" -->
+
+    <!-- ID Column -->
+    <ng-container matColumnDef="id">
+      <mat-header-cell *matHeaderCellDef mat-sort-header>Id</mat-header-cell>
+      <mat-cell *matCellDef="let row" >{{row.id}}</mat-cell>
     </ng-container>
 
-    <!-- Name Column -->
-    <ng-container matColumnDef="name">
-      <th mat-header-cell *matHeaderCellDef mat-sort-header> Name </th>
-      <td mat-cell *matCellDef="let element"> {{element.name}} </td>
+    <ng-container matColumnDef="title">
+      <mat-header-cell *matHeaderCellDef mat-sort-header>Title</mat-header-cell>
+      <mat-cell *matCellDef="let row"> {{row.title}}</mat-cell>
     </ng-container>
 
-    <!-- Weight Column -->
-    <ng-container matColumnDef="weight">
-      <th mat-header-cell *matHeaderCellDef mat-sort-header> Weight </th>
-      <td mat-cell *matCellDef="let element"> {{element.weight}} </td>
+    <ng-container matColumnDef="state">
+      <mat-header-cell *matHeaderCellDef mat-sort-header>State</mat-header-cell>
+      <mat-cell *matCellDef="let row"> {{row.state}}</mat-cell>
     </ng-container>
 
-    <!-- Symbol Column -->
-    <ng-container matColumnDef="symbol">
-      <th mat-header-cell *matHeaderCellDef mat-sort-header> Symbol </th>
-      <td mat-cell *matCellDef="let element"> {{element.symbol}} </td>
+    <ng-container matColumnDef="url">
+      <mat-header-cell *matHeaderCellDef mat-sort-header>Url</mat-header-cell>
+      <mat-cell *matCellDef="let row"> {{row.url}}</mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="created_at">
+      <mat-header-cell *matHeaderCellDef mat-sort-header>Created at</mat-header-cell>
+      <mat-cell *matCellDef="let row"> {{row.created_at}}</mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="updated_at">
+      <mat-header-cell *matHeaderCellDef mat-sort-header>Updated at</mat-header-cell>
+      <mat-cell *matCellDef="let row"> {{row.updated_at}}</mat-cell>
     </ng-container>
 
     <!-- actions -->
@@ -36,103 +59,30 @@
         </button>
       </mat-header-cell>
 
-      <mat-cell *matCellDef="let element; let i=index;">
-        <button mat-icon-button color="accent" (click)="startEdit(i, element.position, element.name, element.weight, element.symbol)">
+      <mat-cell *matCellDef="let row; let i=index;">
+        <button mat-icon-button color="accent" (click)="startEdit(i, row.id, row.title, row.state, row.url, row.created_at, row.updated_at)">
           <mat-icon aria-label="Edit">edit</mat-icon>
         </button>
 
-        <button mat-icon-button color="accent" (click)="deleteItem(i, element.name)">
+        <button mat-icon-button color="accent" (click)="deleteItem(i, row.id, row.title, row.state, row.url)">
           <mat-icon aria-label="Delete">delete</mat-icon>
         </button>
       </mat-cell>
     </ng-container>
 
+    <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+    <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+  </mat-table>
 
-     <tr mat-header-row *matHeaderRowDef="displayedColumns;"></tr>
-    <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
-  </table>
+
   <div class="no-results" [style.display]="dataSource.renderedData.length == 0 ? '' : 'none'">
-      No rhay resultados
-    </div>
-  <mat-paginator [pageSizeOptions]="[5, 10, 20]" showFirstLastButtons></mat-paginator>
-</div>
-
-
-<!-- Copyright 2018 Google Inc. All Rights Reserved.
-    Use of this source code is governed by an MIT-style license that
-    can be found in the LICENSE file at http://angular.io/license -->
-<!-- ============================================================== -->
-<!-- Simple four boxes Row -->
-<!-- ============================================================== -->
-<div fxLayout="row" fxLayoutWrap="wrap">
-    <!-- column -->
-    <div fxFlex.gt-sm="100" fxFlex.gt-xs="100" fxFlex="100">
-        <mat-card>
-            <mat-card-content>
-                <!-- Row -->
-                <div fxLayout="row" fxLayoutWrap="wrap">
-                    <!-- column -->
-                    <div fxFlex.gt-sm="50" fxFlex.gt-xs="50">
-
-
-                            <form #pacienteForm="ngForm" (ngSubmit)="addPaciente(pacienteForm)">
-                              <input type="hidden" name="_id" #_id="ngModel" [(ngModel)]="pacienteService.selectedPaciente._id">
-                              <div class="row">
-                                <div class="input-field col-s12">
-                                  <input type="text" name="name" #name="ngModel" [(ngModel)]="pacienteService.selectedPaciente.name" placeholder="Enter your FullName">
-                                </div>
-                                <div class="input-field col-s12">
-                                  <input type="text" name="position" #name="ngModel" [(ngModel)]="pacienteService.selectedPaciente.position" placeholder="Enter your Position">
-                                </div>
-                                <div class="input-field col-s12">
-                                  <input type="text" name="weight" #name="ngModel" [(ngModel)]="pacienteService.selectedPaciente.weight" placeholder="Enter weight">
-                                </div>
-                                <div class="input-field col-s12">
-                                  <input type="text" name="symbol" #name="ngModel" [(ngModel)]="pacienteService.selectedPaciente.symbol" value="0" placeholder="Enter symbol">
-                                </div>
-                                <div class="card-action">
-                                  <div class="input-field col-s12">
-                                    <button class="btn right" style="margin-left: 2px;" (click)="resetForm(pacienteForm)">Clean</button>
-                                    <button class="btn right">Save</button>
-                                  </div>
-                                </div>
-                              </div>
-                            </form>
-
-                        <table class="striped highlight black-text">
-                          <thead>
-                            <th>Name</th>
-                            <th>Position</th>
-                            <th>Office</th>
-                            <th>Operations</th>
-                          </thead>
-                          <tbody>
-                            <tr *ngFor="let paciente of pacienteService.pacientes">
-                              <td>{{ paciente.name }}</td>
-                              <td>{{ paciente.position }}</td>
-                              <td>{{ paciente.office }}</td>
-                              <td>
-                                <a (click)="editPaciente(paciente)">
-                                  <i class="material-icons">edit</i>
-                                </a>
-                                <a (click)="deletePaciente(paciente._id, pacienteForm)">
-                                  <i class="material-icons">delete</i>
-                                </a>
-                              </td>
-                            </tr>
-                          </tbody>
-                        </table>
-
-
-                    </div>
-                </div>
-            </mat-card-content>
-        </mat-card>
-    </div>
-    <!-- column -->
-</div>
-<div class="container">
-  <div class="row">
-
+    No results
   </div>
+
+  <mat-paginator #paginator
+                 [length]="dataSource.filteredData.length"
+                 [pageIndex]="0"
+                 [pageSize]="10"
+                 [pageSizeOptions]="[5, 10, 25, 100]">
+  </mat-paginator>
 </div>

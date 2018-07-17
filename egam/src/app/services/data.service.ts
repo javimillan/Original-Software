@@ -1,20 +1,20 @@
 import {Injectable} from '@angular/core';
 import {BehaviorSubject} from 'rxjs/BehaviorSubject';
-// import {Issue} from '../models/issue';
+import {Issue} from '../models/issue';
 import {HttpClient, HttpErrorResponse} from '@angular/common/http';
-import { Paciente } from '../models/paciente';
 
 @Injectable()
 export class DataService {
-  private readonly API_URL = 'https://api.github.com/repos/angular/angular/issues';
+  // private readonly API_URL = 'https://api.github.com/repos/angular/angular/issues';
+  private readonly API_URL = 'http://localhost:3000/api/pacientes';
 
-  dataChange: BehaviorSubject<Paciente[]> = new BehaviorSubject<Paciente[]>([]);
+  dataChange: BehaviorSubject<Issue[]> = new BehaviorSubject<Issue[]>([]);
   // Temporarily stores data from dialogs
   dialogData: any;
 
   constructor (private httpClient: HttpClient) {}
 
-  get data(): Paciente[] {
+  get data(): Issue[] {
     return this.dataChange.value;
   }
 
@@ -24,7 +24,7 @@ export class DataService {
 
   /** CRUD METHODS */
   getAllIssues(): void {
-    this.httpClient.get<Paciente[]>(this.API_URL).subscribe(data => {
+    this.httpClient.get<Issue[]>(this.API_URL).subscribe(data => {
         this.dataChange.next(data);
       },
       (error: HttpErrorResponse) => {
@@ -33,11 +33,11 @@ export class DataService {
   }
 
   // DEMO ONLY, you can find working methods below
-  addIssue (issue: Paciente): void {
+  addIssue (issue: Issue): void {
     this.dialogData = issue;
   }
 
-  updateIssue (issue: Paciente): void {
+  updateIssue (issue: Issue): void {
     this.dialogData = issue;
   }
 
