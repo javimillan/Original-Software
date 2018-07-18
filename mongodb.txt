@@ -22,6 +22,111 @@ db.createCollection('empresas')
 
 show collections
 
+for (var i = 1; i <= 5000; i++) {
+   db.pacientes.insert(   {
+       "url": "https://api.github.com/repos/angular/angular/issues/24918",
+       "repository_url": "https://api.github.com/repos/angular/angular",
+       "labels_url": "https://api.github.com/repos/angular/angular/issues/24918/labels{/name}",
+       "comments_url": "https://api.github.com/repos/angular/angular/issues/24918/comments",
+       "events_url": "https://api.github.com/repos/angular/angular/issues/24918/events",
+       "html_url": "https://github.com/angular/angular/issues/24918",
+       "id": 341826810,
+       "node_id": "MDU6SXNzdWUzNDE4MjY4MTA=",
+       "number": 24918,
+       "title": "not providing service is a silent error",
+       "user": {
+         "login": "inspirassion",
+         "id": 38664774,
+         "node_id": "MDQ6VXNlcjM4NjY0Nzc0",
+         "avatar_url": "https://avatars0.githubusercontent.com/u/38664774?v=4",
+         "gravatar_id": "",
+         "url": "https://api.github.com/users/inspirassion",
+         "html_url": "https://github.com/inspirassion",
+         "followers_url": "https://api.github.com/users/inspirassion/followers",
+         "following_url": "https://api.github.com/users/inspirassion/following{/other_user}",
+         "gists_url": "https://api.github.com/users/inspirassion/gists{/gist_id}",
+         "starred_url": "https://api.github.com/users/inspirassion/starred{/owner}{/repo}",
+         "subscriptions_url": "https://api.github.com/users/inspirassion/subscriptions",
+         "organizations_url": "https://api.github.com/users/inspirassion/orgs",
+         "repos_url": "https://api.github.com/users/inspirassion/repos",
+         "events_url": "https://api.github.com/users/inspirassion/events{/privacy}",
+         "received_events_url": "https://api.github.com/users/inspirassion/received_events",
+         "type": "User",
+         "site_admin": false
+       },
+       "labels": [
+   
+       ],
+       "state": "open",
+       "locked": false,
+       "assignee": null,
+       "assignees": [
+   
+       ],
+       "milestone": null,
+       "comments": 0,
+       "created_at": "2018-07-17T08:58:27Z",
+       "updated_at": "2018-07-17T08:58:27Z",
+       "closed_at": null,
+       "author_association": "NONE",
+       "body": "It s better to raise exception when service is used and not provided, I spent hours trying to figure out strange system behaiviour to realise that it's because I use service that is not provided"
+     } )
+}
+
+
+
+[
+  {
+    "url": "https://api.github.com/repos/angular/angular/issues/24918",
+    "repository_url": "https://api.github.com/repos/angular/angular",
+    "labels_url": "https://api.github.com/repos/angular/angular/issues/24918/labels{/name}",
+    "comments_url": "https://api.github.com/repos/angular/angular/issues/24918/comments",
+    "events_url": "https://api.github.com/repos/angular/angular/issues/24918/events",
+    "html_url": "https://github.com/angular/angular/issues/24918",
+    "id": 341826810,
+    "node_id": "MDU6SXNzdWUzNDE4MjY4MTA=",
+    "number": 24918,
+    "title": "not providing service is a silent error",
+    "user": {
+      "login": "inspirassion",
+      "id": 38664774,
+      "node_id": "MDQ6VXNlcjM4NjY0Nzc0",
+      "avatar_url": "https://avatars0.githubusercontent.com/u/38664774?v=4",
+      "gravatar_id": "",
+      "url": "https://api.github.com/users/inspirassion",
+      "html_url": "https://github.com/inspirassion",
+      "followers_url": "https://api.github.com/users/inspirassion/followers",
+      "following_url": "https://api.github.com/users/inspirassion/following{/other_user}",
+      "gists_url": "https://api.github.com/users/inspirassion/gists{/gist_id}",
+      "starred_url": "https://api.github.com/users/inspirassion/starred{/owner}{/repo}",
+      "subscriptions_url": "https://api.github.com/users/inspirassion/subscriptions",
+      "organizations_url": "https://api.github.com/users/inspirassion/orgs",
+      "repos_url": "https://api.github.com/users/inspirassion/repos",
+      "events_url": "https://api.github.com/users/inspirassion/events{/privacy}",
+      "received_events_url": "https://api.github.com/users/inspirassion/received_events",
+      "type": "User",
+      "site_admin": false
+    },
+    "labels": [
+
+    ],
+    "state": "open",
+    "locked": false,
+    "assignee": null,
+    "assignees": [
+
+    ],
+    "milestone": null,
+    "comments": 0,
+    "created_at": "2018-07-17T08:58:27Z",
+    "updated_at": "2018-07-17T08:58:27Z",
+    "closed_at": null,
+    "author_association": "NONE",
+    "body": "It s better to raise exception when service is used and not provided, I spent hours trying to figure out strange system behaiviour to realise that it's because I use service that is not provided"
+  }
+
+]
+
 db.empresas.insert([
   {
     nombre: 'AMBULANCIAS BENITO, SL',
