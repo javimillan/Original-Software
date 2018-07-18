@@ -14,14 +14,20 @@ import {DOCUMENT} from '@angular/common';
 })
 export class SpinnerComponent implements OnDestroy {
     public isSpinnerVisible = true;
-   
+
     @Input() public backgroundColor = 'rgba(0, 115, 170, 0.69)';
-    
+
     constructor(private router: Router, @Inject(DOCUMENT) private document: Document) {
         this.router.events.subscribe(event => {
             if (event instanceof NavigationStart) {
+              console.log("SPINNER IN");
+
                 this.isSpinnerVisible = true;
+                // delay(function(){
+                // }, 5000 );
+
             } else if ( event instanceof NavigationEnd || event instanceof NavigationCancel || event instanceof NavigationError) {
+              console.log("SPINNER OUT");
                 this.isSpinnerVisible = false;
             }
         }, () => {

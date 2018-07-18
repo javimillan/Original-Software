@@ -74,10 +74,18 @@
     <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
   </mat-table>
 
-
   <div class="no-results" [style.display]="dataSource.renderedData.length == 0 ? '' : 'none'">
-    No results
+        <div class="text-loading">No hay resultados.</div>
   </div>
+  <!-- <div class="no-results" [style.display]="dataSource.renderedData.length == 0 ? '' : 'none'">
+    <div class="preloader">
+        <div class="spinner">
+          <div class="double-bounce1"></div>
+          <div class="double-bounce2"></div>
+        </div>
+        <div class="text-loading">Cargando pacientes...</div>
+    </div>
+  </div> -->
 
   <mat-paginator #paginator
                  [length]="dataSource.filteredData.length"

@@ -11,7 +11,6 @@ import { FlexLayoutModule } from '@angular/flex-layout';
 import { FullComponent } from './layouts/full/full.component';
 import { AppHeaderComponent } from './layouts/full/header/header.component';
 import { AppSidebarComponent } from './layouts/full/sidebar/sidebar.component';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { DemoMaterialModule} from './demo-material-module';
 
 import { SharedModule } from './shared/shared.module';
@@ -55,7 +54,7 @@ import {FormsModule, ReactiveFormsModule} from '@angular/forms';
     MatTableModule,
     MatToolbarModule,
     MatPaginatorModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
     DemoMaterialModule,
     FlexLayoutModule,
     SharedModule,
@@ -68,6 +67,7 @@ import {FormsModule, ReactiveFormsModule} from '@angular/forms';
   ],
   providers: [
     DataService,
+    SpinnerComponent
   {
     provide: LocationStrategy,
     useClass: HashLocationStrategy

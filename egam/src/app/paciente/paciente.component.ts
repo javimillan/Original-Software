@@ -14,6 +14,7 @@ import 'rxjs/add/operator/distinctUntilChanged';
 import {AddDialogComponent} from '../dialogs/add/add.dialog.component';
 import {EditDialogComponent} from '../dialogs/edit/edit.dialog.component';
 import {DeleteDialogComponent} from '../dialogs/delete/delete.dialog.component';
+import {SpinnerComponent} from '../shared/spinner.component';
 
 @Component({
   selector: 'app-paciente',
@@ -29,7 +30,9 @@ export class PacienteComponent implements OnInit {
 
   constructor(public httpClient: HttpClient,
               public dialog: MatDialog,
-              public dataService: DataService) {}
+              public dataService: DataService,
+            public spinner: SpinnerComponent) {
+              }
 
   @ViewChild(MatPaginator) paginator: MatPaginator;
   @ViewChild(MatSort) sort: MatSort;
@@ -37,6 +40,7 @@ export class PacienteComponent implements OnInit {
 
   ngOnInit() {
     this.loadData();
+
   }
 
   refresh() {
@@ -115,6 +119,7 @@ export class PacienteComponent implements OnInit {
   }
 
   public loadData() {
+
     this.exampleDatabase = new DataService(this.httpClient);
     this.dataSource = new ExampleDataSource(this.exampleDatabase, this.paginator, this.sort);
     Observable.fromEvent(this.filter.nativeElement, 'keyup')
@@ -126,6 +131,7 @@ export class PacienteComponent implements OnInit {
         }
         this.dataSource.filter = this.filter.nativeElement.value;
       });
+
   }
 }
 
