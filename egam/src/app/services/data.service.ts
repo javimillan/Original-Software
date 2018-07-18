@@ -2,6 +2,7 @@ import {Injectable} from '@angular/core';
 import {BehaviorSubject} from 'rxjs/BehaviorSubject';
 import {Issue} from '../models/issue';
 import {HttpClient, HttpErrorResponse} from '@angular/common/http';
+import {MatSnackBarModule} from '@angular/material/snack-bar';
 
 @Injectable()
 export class DataService {
@@ -12,7 +13,7 @@ export class DataService {
   // Temporarily stores data from dialogs
   dialogData: any;
 
-  constructor (private httpClient: HttpClient) {}
+  constructor (private httpClient: HttpClient, public snackBar:MatSnackBarModule) {}
 
   get data(): Issue[] {
     return this.dataChange.value;
@@ -44,6 +45,25 @@ export class DataService {
   deleteIssue (id: number): void {
     console.log(id);
   }
+
+  // DELETE METHOD
+  deleteItem(id: number): void {
+    console.log("borrar registro de bbdd");
+    this.httpClient.delete(this.API_URL + id).subscribe(data => {
+      console.log(data['']);
+        // this.toasterService.showToaster('Successfully deleted', 3000);
+        snackBar.open('Successfully deleted', 'Aceptar');
+      },
+      (err: HttpErrorResponse) => {
+        // this.toasterService.showToaster('Error occurred. Details: ' + err.name + ' ' + err.message, 8000);
+        snackBar.open('Error occurred. Details: ' + err.name + ' ' + err.message, 'Aceptar');
+      }
+    );
+  }
+
+
+
+
 }
 
 
@@ -66,18 +86,6 @@ export class DataService {
     this.httpClient.put(this.API_URL + kanbanItem.id, kanbanItem).subscribe(data => {
         this.dialogData = kanbanItem;
         this.toasterService.showToaster('Successfully edited', 3000);
-      },
-      (err: HttpErrorResponse) => {
-        this.toasterService.showToaster('Error occurred. Details: ' + err.name + ' ' + err.message, 8000);
-      }
-    );
-  }
-
-  // DELETE METHOD
-  deleteItem(id: number): void {
-    this.httpClient.delete(this.API_URL + id).subscribe(data => {
-      console.log(data['']);
-        this.toasterService.showToaster('Successfully deleted', 3000);
       },
       (err: HttpErrorResponse) => {
         this.toasterService.showToaster('Error occurred. Details: ' + err.name + ' ' + err.message, 8000);

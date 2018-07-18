@@ -67,7 +67,7 @@ import {FormsModule, ReactiveFormsModule} from '@angular/forms';
   ],
   providers: [
     DataService,
-    SpinnerComponent
+    SpinnerComponent,
   {
     provide: LocationStrategy,
     useClass: HashLocationStrategy
