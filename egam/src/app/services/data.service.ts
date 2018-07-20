@@ -13,7 +13,7 @@ export class DataService {
   // Temporarily stores data from dialogs
   dialogData: any;
 
-  constructor (private httpClient: HttpClient, public snackBar:MatSnackBarModule) {}
+  constructor (private httpClient: HttpClient) {}
 
   get data(): Issue[] {
     return this.dataChange.value;
@@ -47,19 +47,19 @@ export class DataService {
   }
 
   // DELETE METHOD
-  deleteItem(id: number): void {
-    console.log("borrar registro de bbdd");
-    this.httpClient.delete(this.API_URL + id).subscribe(data => {
-      console.log(data['']);
-        // this.toasterService.showToaster('Successfully deleted', 3000);
-        snackBar.open('Successfully deleted', 'Aceptar');
-      },
-      (err: HttpErrorResponse) => {
-        // this.toasterService.showToaster('Error occurred. Details: ' + err.name + ' ' + err.message, 8000);
-        snackBar.open('Error occurred. Details: ' + err.name + ' ' + err.message, 'Aceptar');
-      }
-    );
-  }
+  // deleteItem(id: number): void {
+  //   console.log("borrar registro de bbdd");
+  //   this.httpClient.delete(this.API_URL + id).subscribe(data => {
+  //     console.log(data['']);
+  //       // this.toasterService.showToaster('Successfully deleted', 3000);
+  //       snackBar.open('Successfully deleted', 'Aceptar');
+  //     },
+  //     (err: HttpErrorResponse) => {
+  //       // this.toasterService.showToaster('Error occurred. Details: ' + err.name + ' ' + err.message, 8000);
+  //       snackBar.open('Error occurred. Details: ' + err.name + ' ' + err.message, 'Aceptar');
+  //     }
+  //   );
+  // }
 
 
 

@@ -34,12 +34,12 @@
   padding: 14px;
   font-size: 14px;
   font-style: italic;
-  /* padding: 0;
+  padding: 0;
   position: absolute;
     top: 0;
     bottom: 0;
     left: 0;
-    right: 0; */
+    right: 0;
 }
 .text-loading{text-align: center;width: 100%;padding-top: 40px;}
 .mat-cell:nth-child(1),

@@ -231,3 +231,16 @@ db.empresas.find().limit(4).sort({lastName: -1})
 db.empresas.find().forEach(function(doc) {
   print("Customer Name" + doc.firstName);
 });
+
+
+   db.usuario.insert(   {
+       "IdUsuario": "111",
+       "Nombre": "Javier",
+"CodigoUsuario": "001",
+"Contrasenya": "0011",
+"IdAreaLoginDefecto": "999",
+"ThemesAplicacion": "999",
+"FechaInactivo": "999",
+"FechaAlta": "999",
+"IdUsuarioAlta": "999"
+	})
