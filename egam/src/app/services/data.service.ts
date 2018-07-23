@@ -33,9 +33,15 @@ export class DataService {
       });
   }
 
+  postPaciente(issue: Issue) {
+    return this.httpClient.post(this.API_URL, issue);
+  }
+
   // DEMO ONLY, you can find working methods below
-  addIssue (issue: Issue): void {
+  addIssue (issue: Issue){
     this.dialogData = issue;
+
+    return this.httpClient.post(this.API_URL, issue);
   }
 
   updateIssue (issue: Issue): void {

@@ -9,11 +9,15 @@ pacienteCtrl.getPacientes = async (req, res, next) => {
 
 pacienteCtrl.createPaciente = async (req, res, next) => {
     const paciente = new Paciente({
-        name: req.body.name,
-        position: req.body.position,
-        office: req.body.office,
-        salary: req.body.salary
+
+      // id: number, title: string, state: string, url: string, created_at: string, updated_at: string
+        id: req.body.id,
+        title: req.body.title,
+        state: req.body.state,
+        url: req.body.url
+
     });
+    console.log("TITLE " + title);
     await paciente.save();
     res.json({status: 'paciente created'});
 };

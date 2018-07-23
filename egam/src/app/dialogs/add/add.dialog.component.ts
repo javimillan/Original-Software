@@ -3,6 +3,7 @@ import {Component, Inject} from '@angular/core';
 import {DataService} from '../../services/data.service';
 import {FormControl, Validators} from '@angular/forms';
 import {Issue} from '../../models/issue';
+import { NgForm } from '@angular/forms';
 
 @Component({
   selector: 'app-add.dialog',
@@ -30,6 +31,20 @@ export class AddDialogComponent {
   // emppty stuff
   }
 
+
+
+  addPaciente(form?: NgForm) {
+    console.log(form);
+    console.log(form.value);
+
+      this.dataService.postPaciente(form.value)
+        .subscribe(res => {
+          alert("añadido con exito!!");
+        });
+
+
+  }
+
   onNoClick(): void {
     this.dialogRef.close();
   }
@@ -37,4 +52,7 @@ export class AddDialogComponent {
   public confirmAdd(): void {
     this.dataService.addIssue(this.data);
   }
+
+
+
 }

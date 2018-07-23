@@ -58,8 +58,17 @@ export class PacienteComponent implements OnInit {
         // For add we're just pushing a new row inside DataService
         this.exampleDatabase.dataChange.value.push(this.dataService.getDialogData());
         this.refreshTable();
+      }else{
+        alert("resultado no es 1");
       }
     });
+
+
+    // this.dataService.addIssue(issue)
+    //   .subscribe(res => {
+    //     console.log(res);
+    //     this.refreshTable();
+    //   });
   }
 
   startEdit(i: number, id: number, title: string, state: string, url: string, created_at: string, updated_at: string) {
